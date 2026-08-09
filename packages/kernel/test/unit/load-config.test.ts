@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { z } from 'zod';
-import { parseConfig, ConfigValidationError } from '../src/config/load-config.js';
+import { parseConfig, ConfigValidationError } from '../../src/config/load-config.js';
 
 const Schema = z.object({
   PORT: z.coerce.number().int(),

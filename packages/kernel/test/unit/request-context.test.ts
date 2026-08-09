@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { RequestContext, MissingTenantContextError } from '../src/context/request-context.js';
+import { RequestContext, MissingTenantContextError } from '../../src/context/request-context.js';
 import type { TenantId } from '@platform/contracts';
 
 const tenantA = 'ten_01JBQ0000000000000000000' as TenantId;

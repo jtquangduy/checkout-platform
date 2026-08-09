@@ -1,0 +1,34 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug current file (Node)",
+      "type": "node",
+      "request": "launch",
+      "program": "${file}",
+      "cwd": "${fileDirname}",
+      "console": "integratedTerminal",
+      "skipFiles": ["<node_internals>/**"]
+    },
+    {
+      "name": "Debug kernel unit tests (Vitest)",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/packages/kernel/node_modules/vitest/vitest.mjs",
+      "args": ["run", "test/unit"],
+      "cwd": "${workspaceFolder}/packages/kernel",
+      "console": "integratedTerminal",
+      "skipFiles": ["<node_internals>/**"]
+    },
+    {
+      "name": "Debug kernel integration tests (Vitest)",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/packages/kernel/node_modules/vitest/vitest.mjs",
+      "args": ["run", "test/integration", "--no-file-parallelism"],
+      "cwd": "${workspaceFolder}/packages/kernel",
+      "console": "integratedTerminal",
+      "skipFiles": ["<node_internals>/**"]
+    }
+  ]
+}
