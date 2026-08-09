@@ -50,12 +50,14 @@ export const TenantId   = z.string().regex(/^ten_[0-9A-HJKMNP-TV-Z]{26}$/).brand
 export const CheckoutId = z.string().regex(/^cko_[0-9A-HJKMNP-TV-Z]{26}$/).brand<'CheckoutId'>();
 export const PaymentId  = z.string().regex(/^pay_[0-9A-HJKMNP-TV-Z]{26}$/).brand<'PaymentId'>();
 export const InvoiceId  = z.string().regex(/^inv_[0-9A-HJKMNP-TV-Z]{26}$/).brand<'InvoiceId'>();
+export const UserId = z.string().regex(/^usr_[0-9A-HJKMNP-TV-Z]{26}$/).brand<'UserId'>();
 
 export type OrderId    = z.infer<typeof OrderId>;
 export type TenantId   = z.infer<typeof TenantId>;
 export type CheckoutId = z.infer<typeof CheckoutId>;
 export type PaymentId  = z.infer<typeof PaymentId>;
 export type InvoiceId  = z.infer<typeof InvoiceId>;
+export type UserId = z.infer<typeof UserId>;
 
 export const AuditFields = z.object({
   createdAt: z.coerce.date(),
