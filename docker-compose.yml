@@ -4,13 +4,33 @@ services:
   mongo:
     image: mongo:7
     container_name: checkout-mongo
-    command: ["--replSet", "rs0", "--bind_ip_all"]
+    # Generates a keyFile on first boot (required whenever --auth is combined
+    # with --replSet, even for one node) onto a named volume so its 400
+    # permissions are real Linux permissions, not a Windows bind-mount's.
+    # Then hands off to the official entrypoint, which creates the root user
+    # from MONGO_INITDB_ROOT_* on first boot.
+    entrypoint: >
+      bash -c "
+      if [ ! -f /keyfile/mongo-keyfile ]; then
+        openssl rand -base64 756 > /keyfile/mongo-keyfile;
+        chmod 400 /keyfile/mongo-keyfile;
+        chown mongodb:mongodb /keyfile/mongo-keyfile;
+      fi;
+      exec docker-entrypoint.sh mongod --replSet rs0 --bind_ip_all --auth --keyFile /keyfile/mongo-keyfile
+      "
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USER:-admin}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD:-devpassword}
     ports:
       - "27017:27017"
     volumes:
       - mongo-data:/data/db
+      - mongo-keyfile:/keyfile
     healthcheck:
-      test: mongosh --quiet --eval "try { rs.status().ok } catch(e) { rs.initiate({_id:'rs0',members:[{_id:0,host:'mongo:27017'}]}).ok }"
+      test: >
+        mongosh --quiet -u "$$MONGO_INITDB_ROOT_USERNAME" -p "$$MONGO_INITDB_ROOT_PASSWORD"
+        --authenticationDatabase admin
+        --eval "try { rs.status().ok } catch(e) { rs.initiate({_id:'rs0',members:[{_id:0,host:'mongo:27017'}]}).ok }"
       interval: 5s
       timeout: 5s
       retries: 20
@@ -42,4 +62,5 @@ services:
 
 volumes:
   mongo-data:
+  mongo-keyfile:
   rabbitmq-data:

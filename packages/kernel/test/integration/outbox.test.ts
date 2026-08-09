@@ -14,7 +14,9 @@ interface Counter {
   value: number;
 }
 
-const MONGO_URI = process.env.MONGO_TEST_URI ?? 'mongodb://localhost:27017/?replicaSet=rs0&directConnection=true';
+const MONGO_URI =
+  process.env.MONGO_TEST_URI ??
+  'mongodb://admin:devpassword@localhost:27017/?replicaSet=rs0&directConnection=true&authSource=admin';
 const DB_NAME = 'kernel_outbox_test';
 
 let client: MongoClient;
