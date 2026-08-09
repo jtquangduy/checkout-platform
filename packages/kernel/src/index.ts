@@ -3,3 +3,7 @@ export * from './context/request-context.js';
 export * from './outbox/types.js';
 export * from './outbox/unit-of-work.js';
 export * from './outbox/ensure-indexes.js';
+export * from './outbox/backoff.js';
+export * from './outbox/claim-batch.js';
+export * from './outbox/rabbit-connection.js';
+export * from './outbox/relay.js';

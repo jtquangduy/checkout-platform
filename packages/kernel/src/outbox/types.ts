@@ -22,4 +22,8 @@ export interface OutboxRow {
   attempts: number;
   availableAt: Date;
   occurredAt: Date;
+  claimedBy?: string;
+  leaseExpiresAt?: Date;
+  publishedAt?: Date;
+  lastError?: string;
 }

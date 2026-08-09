@@ -38,6 +38,15 @@ services:
   rabbitmq:
     image: rabbitmq:3.13-management
     container_name: checkout-rabbitmq
+    # RABBITMQ_DEFAULT_USER/PASS only take effect on a fresh data volume (the
+    # user database lives in Mnesia, persisted across restarts). Defaults to
+    # guest/guest; override via .env for a non-default user. Note "guest" is
+    # restricted to loopback (localhost) connections only — fine for host-run
+    # tests, but a future containerized service connecting from elsewhere in
+    # the Docker network will need RABBITMQ_USER/PASSWORD set to a real user.
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER:-guest}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD:-guest}
     ports:
       - "5672:5672"    # AMQP
       - "15672:15672"  # management UI
