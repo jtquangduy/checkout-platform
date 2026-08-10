@@ -13,3 +13,4 @@ export * from './inbox/is-duplicate-key-error.js';
 export * from './inbox/is-lease-expired.js';
 export * from './inbox/inbox.js';
 export * from './inbox/ensure-indexes.js';
+export * from './http/swagger.js';

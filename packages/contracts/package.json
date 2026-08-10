@@ -12,7 +12,8 @@
   },
   "dependencies": {
     "zod": "^3.23.8",
-    "ulid": "^2.3.0"
+    "ulid": "^2.3.0",
+    "@asteasolutions/zod-to-openapi": "^7.3.0"
   },
   "devDependencies": {
     "typescript": "^5.6.0",

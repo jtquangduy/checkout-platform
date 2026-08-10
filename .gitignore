@@ -6,3 +6,4 @@ dist/
 .env
 .env.local
 infra/keys/*.pem
+openapi.generated.json
