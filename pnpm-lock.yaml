@@ -128,6 +128,9 @@ importers:
       '@platform/kernel':
         specifier: workspace:*
         version: link:../../packages/kernel
+      mongodb:
+        specifier: ^6.9.0
+        version: 6.21.0
     devDependencies:
       '@types/node':
         specifier: ^22.0.0
