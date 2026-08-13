@@ -24,3 +24,15 @@ const LEGAL: Record<OrderStatus, OrderStatus[]> = {
 export function isLegalTransition(from: OrderStatus, to: OrderStatus): boolean {
   return LEGAL[from].includes(to);
 }
+
+// States only reachable by having actually been paid once — CANCELLED is
+// reachable straight from DRAFT/READY_FOR_CHECKOUT without payment, so it's
+// excluded; everything past CHECKOUT_PENDING in the transition table is not.
+export const PAID_STATUSES: OrderStatus[] = [
+  'PAID_AWAITING_PRODUCTION',
+  'PRODUCTION_REJECTED',
+  'IN_PRODUCTION',
+  'QA_REVIEW',
+  'DELIVERED',
+  'REFUNDED',
+];

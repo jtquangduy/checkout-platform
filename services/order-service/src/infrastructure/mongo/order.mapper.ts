@@ -13,6 +13,7 @@ export function toOrderDocument(order: Order): OrderDocument {
     status: s.status,
     items: [...s.items],
     version: s.version,
+    checkout: null,
     createdAt: s.createdAt,
     updatedAt: s.updatedAt,
   };
