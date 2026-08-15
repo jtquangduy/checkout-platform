@@ -1,0 +1,22 @@
+{
+  "name": "@platform/catalog-pricing-service",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "vitest run test/unit",
+    "test:integration": "vitest run test/integration",
+    "typecheck": "tsc -p tsconfig.test.json --noEmit"
+  },
+  "dependencies": {
+    "@platform/contracts": "workspace:*",
+    "@platform/kernel": "workspace:*",
+    "mongodb": "^6.9.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.0",
+    "vitest": "^2.1.0",
+    "@types/node": "^22.0.0"
+  }
+}

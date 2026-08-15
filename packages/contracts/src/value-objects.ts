@@ -36,6 +36,11 @@ export function applyRate(money: Money, rate: number): Money {
   return Money.parse({ amount: roundHalfToEven(money.amount * rate), currency: money.currency });
 }
 
+export function multiplyMoney(money: Money, quantity: number): Money {
+  if (!Number.isInteger(quantity)) throw new RangeError(`quantity must be an integer, got ${quantity}`);
+  return Money.parse({ amount: money.amount * quantity, currency: money.currency });
+}
+
 function roundHalfToEven(n: number): number {
   const floor = Math.floor(n);
   const diff = n - floor;
@@ -51,6 +56,8 @@ export const CheckoutId = z.string().regex(/^cko_[0-9A-HJKMNP-TV-Z]{26}$/).brand
 export const PaymentId  = z.string().regex(/^pay_[0-9A-HJKMNP-TV-Z]{26}$/).brand<'PaymentId'>();
 export const InvoiceId  = z.string().regex(/^inv_[0-9A-HJKMNP-TV-Z]{26}$/).brand<'InvoiceId'>();
 export const UserId = z.string().regex(/^usr_[0-9A-HJKMNP-TV-Z]{26}$/).brand<'UserId'>();
+export const PriceBookId = z.string().regex(/^pbk_[0-9A-HJKMNP-TV-Z]{26}$/).brand<'PriceBookId'>();
+export const QuoteId     = z.string().regex(/^quo_[0-9A-HJKMNP-TV-Z]{26}$/).brand<'QuoteId'>();
 
 export type OrderId    = z.infer<typeof OrderId>;
 export type TenantId   = z.infer<typeof TenantId>;
@@ -58,6 +65,8 @@ export type CheckoutId = z.infer<typeof CheckoutId>;
 export type PaymentId  = z.infer<typeof PaymentId>;
 export type InvoiceId  = z.infer<typeof InvoiceId>;
 export type UserId = z.infer<typeof UserId>;
+export type PriceBookId = z.infer<typeof PriceBookId>;
+export type QuoteId     = z.infer<typeof QuoteId>;
 
 export const AuditFields = z.object({
   createdAt: z.coerce.date(),
