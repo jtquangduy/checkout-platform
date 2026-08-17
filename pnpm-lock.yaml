@@ -164,6 +164,28 @@ importers:
         specifier: ^2.1.0
         version: 2.1.9(@types/node@22.20.1)
 
+  services/payment-service:
+    dependencies:
+      '@platform/contracts':
+        specifier: workspace:*
+        version: link:../../packages/contracts
+      '@platform/kernel':
+        specifier: workspace:*
+        version: link:../../packages/kernel
+      mongodb:
+        specifier: ^6.9.0
+        version: 6.21.0
+    devDependencies:
+      '@types/node':
+        specifier: ^22.0.0
+        version: 22.20.1
+      typescript:
+        specifier: ^5.6.0
+        version: 5.9.3
+      vitest:
+        specifier: ^2.1.0
+        version: 2.1.9(@types/node@22.20.1)
+
 packages:
 
   '@asteasolutions/zod-to-openapi@7.3.4':
